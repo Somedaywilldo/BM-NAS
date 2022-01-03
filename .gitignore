@@ -13,7 +13,6 @@ BM-NAS_dataset
 checkpoints
 old/
 index/
-
 main_darts_found_ego.py
 main_darts_found_extreme_simple_concat_attn_ntu.py
 main_darts_found_extreme_simple_concat_ntu.py
@@ -25,7 +24,7 @@ main_darts_searchable_ego.py
 # main_darts_searchable_ntu.py
 main_darts_searchable_nvgesture.py
 paper_plot.ipynb
-README.md
+# README.md
 statistics.ipynb
 test_node_found.ipynb
 test_node_search.ipynb
