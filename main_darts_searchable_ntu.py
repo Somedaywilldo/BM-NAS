@@ -45,7 +45,7 @@ def parse_args():
     parser.add_argument('--L', type=int, help='length after conv and pool', default=8)
     # parser.add_argument('--num_heads', type=int, help='attention heads number', default=2)
     parser.add_argument('--batchsize', type=int, help='batch size', default=96)
-    parser.add_argument('--use_dataparallel', help='Use several GPUs', action='store_true', default=False)
+    parser.add_argument('--parallel', help='Use several GPUs', action='store_true', default=False)
     parser.add_argument('--modality', type=str, help='', default='both')
 
 

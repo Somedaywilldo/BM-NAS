@@ -33,7 +33,7 @@ def train_darts_model(dataloaders, args, device, logger):
             lr=args.arch_learning_rate, betas=(0.5, 0.999), weight_decay=args.arch_weight_decay)
 
     # hardware tuning
-    if torch.cuda.device_count() > 1 and args.use_dataparallel:
+    if torch.cuda.device_count() > 1 and args.parallel:
         model = torch.nn.DataParallel(model)
 
     model.to(device)
@@ -45,7 +45,7 @@ def train_darts_model(dataloaders, args, device, logger):
                                             dataset_sizes,
                                             device=device, 
                                             num_epochs=args.epochs, 
-                                            use_dataparallel=args.use_dataparallel,
+                                            parallel=args.parallel,
                                             logger=logger,
                                             plotter=plotter,
                                             args=args,
@@ -67,7 +67,7 @@ class Searchable_Image_Text_Net(nn.Module):
         self.reshape_layers = self.create_reshape_layers(args)
         self.multiplier = args.multiplier
         self.steps = args.steps
-        self.use_dataparallel = args.use_dataparallel
+        self.parallel = args.parallel
 
         self.num_input_nodes = args.num_input_nodes
         self.num_keep_edges = args.num_keep_edges
@@ -145,7 +145,7 @@ class Found_Image_Text_Net(nn.Module):
 
         self.multiplier = args.multiplier
         self.steps = args.steps
-        self.use_dataparallel = args.use_dataparallel
+        self.parallel = args.parallel
 
         self.num_input_nodes = args.num_input_nodes
         self.num_keep_edges = args.num_keep_edges

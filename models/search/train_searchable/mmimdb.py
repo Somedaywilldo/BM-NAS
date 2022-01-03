@@ -10,7 +10,7 @@ from models.search.darts.utils import count_parameters, save, save_pickle
 def train_mmimdb_track_f1(  model, architect,
                             criterion, optimizer, scheduler, dataloaders,
                             dataset_sizes, device, num_epochs, 
-                            use_dataparallel, logger, plotter, args,
+                            parallel, logger, plotter, args,
                             f1_type='weighted', init_f1=0.0, th_fscore=0.3, 
                             status='search'):
 
@@ -127,7 +127,7 @@ def train_mmimdb_track_f1(  model, architect,
                 logger.info('{} Loss: {:.4f}, {} F1: {:.4f}'.format(
                     phase, epoch_loss, f1_type, epoch_f1))
                 
-                if use_dataparallel:
+                if parallel:
                     num_params = 0
                     for reshape_layer in model.module.reshape_layers:
                         num_params += count_parameters(reshape_layer)
@@ -159,7 +159,7 @@ def train_mmimdb_track_f1(  model, architect,
                         best_epoch = epoch
                         # best_model_sd = copy.deepcopy(model.state_dict())
                     
-                        if use_dataparallel:
+                        if parallel:
                             save(model.module, os.path.join(args.save, 'best', 'best_model.pt'))
                         else:
                             save(model, os.path.join(args.save, 'best', 'best_model.pt'))
@@ -173,7 +173,7 @@ def train_mmimdb_track_f1(  model, architect,
                         best_test_genotype = copy.deepcopy(genotype)
                         best_test_epoch = epoch
                     
-                        if use_dataparallel:
+                        if parallel:
                             save(model.module, os.path.join(args.save, 'best', 'best_test_model.pt'))
                         else:
                             save(model, os.path.join(args.save, 'best', 'best_test_model.pt'))
@@ -206,7 +206,7 @@ def train_mmimdb_track_f1(  model, architect,
 
 def test_mmimdb_track_f1(  model, criterion, dataloaders,
                            dataset_sizes, device, 
-                           use_dataparallel, logger, args,
+                           parallel, logger, args,
                            f1_type='weighted', init_f1=0.0, th_fscore=0.3):
 
     best_test_genotype = None
@@ -264,7 +264,7 @@ def test_mmimdb_track_f1(  model, criterion, dataloaders,
     logger.info('{} Loss: {:.4f}, {} F1: {:.4f}'.format(
                     phase, epoch_loss, f1_type, epoch_f1))
     
-    if use_dataparallel:
+    if parallel:
         num_params = 0
         for reshape_layer in model.module.reshape_layers:
             num_params += count_parameters(reshape_layer)

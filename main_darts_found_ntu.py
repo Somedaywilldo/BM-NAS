@@ -67,7 +67,7 @@ def parse_args():
     parser.add_argument('--eta_min', type=float, help='eta min', default=0.000001)
     parser.add_argument('--Ti', type=int, help='epochs Ti', default=5)
     parser.add_argument('--Tm', type=int, help='epochs multiplier Tm', default=2)
-    parser.add_argument('--use_dataparallel', help='Use several GPUs', action='store_true', dest='use_dataparallel',
+    parser.add_argument('--parallel', help='Use several GPUs', action='store_true', dest='parallel',
                         default=False)
     parser.add_argument('--j', dest='num_workers', type=int, help='Dataloader CPUS', default=16)
     parser.add_argument('--modality', type=str, help='', default='both')
@@ -124,13 +124,13 @@ def train_model(model, dataloaders, args, device, logger):
     scheduler = sc.LRCosineAnnealingScheduler(args.eta_max, args.eta_min, args.Ti, args.Tm, num_batches_per_epoch)
 
     # hardware tuning
-    if torch.cuda.device_count() > 1 and args.use_dataparallel:
+    if torch.cuda.device_count() > 1 and args.parallel:
         model = torch.nn.DataParallel(model)
     model.to(device)
 
     plotter = Plotter(args)
 
-    if torch.cuda.device_count() > 1 and args.use_dataparallel:
+    if torch.cuda.device_count() > 1 and args.parallel:
         params = model.module.parameters()
     else:
         params = model.parameters()
@@ -143,7 +143,7 @@ def train_model(model, dataloaders, args, device, logger):
     test_acc, test_genotype = tr.train_ntu_track_acc(model, None, criterion, optimizer, 
                                             scheduler, dataloaders, dataset_sizes,
                                             device, args.epochs, args.verbose,
-                                            args.use_dataparallel, logger, plotter, args,
+                                            args.parallel, logger, plotter, args,
                                             status)
 
     test_acc = test_acc.item()
@@ -157,7 +157,7 @@ def test_model(model, dataloaders, args, device,
     model.eval()
     dataset_sizes = {x: len(dataloaders[x].dataset) for x in ['test']}
     # hardware tuning
-    if torch.cuda.device_count() > 1 and args.use_dataparallel:
+    if torch.cuda.device_count() > 1 and args.parallel:
         # print("using parallel")
         model = torch.nn.DataParallel(model)
     model.to(device)

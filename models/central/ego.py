@@ -345,7 +345,7 @@ if __name__ == '__main__':
 
     use_gpu = torch.cuda.is_available()
     device = torch.device("cuda:0" if use_gpu else "cpu")
-    # if torch.cuda.device_count() > 1 and args.use_dataparallel:
+    # if torch.cuda.device_count() > 1 and args.parallel:
     if torch.cuda.device_count() > 1:
         model = torch.nn.DataParallel(model)
     model.to(device)

@@ -347,7 +347,7 @@ if __name__ == "__main__":
 """
 python ntu.py --folder=/mnt/data/xiaoxiang/yihang/datasets/
 
-    --use_dataparallel
+    --parallel
     --num_workers
 
 """

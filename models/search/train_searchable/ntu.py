@@ -11,7 +11,7 @@ import pickle
 
 # train model with darts mixed operations
 def train_ntu_track_acc(model, architect, criterion, optimizer, scheduler, dataloaders, dataset_sizes,
-                device=None, num_epochs=200, verbose=False, use_dataparallel=False, logger=None,
+                device=None, num_epochs=200, verbose=False, parallel=False, logger=None,
                 plotter=None, args=None, status='search'):
 
     best_genotype = None
@@ -111,7 +111,7 @@ def train_ntu_track_acc(model, architect, criterion, optimizer, scheduler, datal
             genotype = None
 
 
-            if use_dataparallel:
+            if parallel:
                 num_params = 0
                 for reshape_layer in model.module.reshape_layers:
                     num_params += count_parameters(reshape_layer)
@@ -138,7 +138,7 @@ def train_ntu_track_acc(model, architect, criterion, optimizer, scheduler, datal
                 best_genotype = copy.deepcopy(genotype)
                 best_epoch = epoch
 
-                if use_dataparallel:
+                if parallel:
                     save(model.module, os.path.join(args.save, 'best', 'best_model.pt'))
                 else:
                     save(model, os.path.join(args.save, 'best', 'best_model.pt'))
@@ -153,7 +153,7 @@ def train_ntu_track_acc(model, architect, criterion, optimizer, scheduler, datal
                 best_test_genotype = copy.deepcopy(genotype)
                 best_test_epoch = epoch
 
-                if use_dataparallel:
+                if parallel:
                     save(model.module, os.path.join(args.save, 'best', 'best_test_model.pt'))
                 else:
                     save(model, os.path.join(args.save, 'best', 'best_test_model.pt'))
