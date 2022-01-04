@@ -28,9 +28,9 @@ def parse_args():
     parser.add_argument('--eval_exp_dir', type=str, help='evaluate which eval exp', default=None)
 
     parser.add_argument('--checkpointdir', type=str, help='output base dir',
-                        default='/mnt/data/xiaoxiang/yihang/Baidu_MM/BM-NAS/checkpoints/ntu')
+                        default='BM-NAS/checkpoints/ntu')
     parser.add_argument('--datadir', type=str, help='data directory',
-                        default='/mnt/scratch/xiaoxiang/yihang/NTU/')
+                        default='BM-NAS_dataset/NTU/')
     parser.add_argument('--ske_cp', type=str, help='Skeleton net checkpoint (assuming is contained in checkpointdir)',
                         default='skeleton_32frames_85.24.checkpoint')
     parser.add_argument('--rgb_cp', type=str, help='RGB net checkpoint (assuming is contained in checkpointdir)',

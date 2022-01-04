@@ -42,6 +42,26 @@ Then, run the following script to reshape all RGB videos to 256x256 with 30 fps:
 $ python datasets/prepare_ntu.py --dir=<dir of RGB videos>
 ```
 
+### Run Experiments
+
+First search the hypernets.
+
+```shell
+$ python main_darts_searchable_ntu.py
+```
+
+Then train the searched fusion network. You need to assign the searching experiment by **--search_exp_dir**.
+
+```shell
+$ python main_darts_found_ntu.py --search_exp_dir=<dir of search exp>
+```
+
+If you want to just run the test process (no training of the fusion network), you can also use this script, you need to assign both the searching and evaluation experiments directories.
+
+```shell
+$ python main_darts_found_ntu.py --search_exp_dir=<dir of search exp> --eval_exp_dir=<dir of eval exp>
+```
+
 ## EgoGesture Experiments
 
 Will be available later.
