@@ -44,10 +44,10 @@ $ python datasets/prepare_ntu.py --dir=<dir of RGB videos>
 
 ### Run Experiments
 
-First search the hypernets.
+First search the hypernets. You can use **--parallel** for data-parallel. The default setting will require about 128GB of GPU memeroy, you may adjust the **--batchsize** according to your budget. 
 
 ```shell
-$ python main_darts_searchable_ntu.py
+$ python main_darts_searchable_ntu.py --parallel
 ```
 
 Then train the searched fusion network. You need to assign the searching experiment by **--search_exp_dir**.
