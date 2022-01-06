@@ -16,11 +16,11 @@ index/
 main_darts_found_ego.py
 main_darts_found_extreme_simple_concat_attn_ntu.py
 main_darts_found_extreme_simple_concat_ntu.py
-main_darts_found_mmimdb.py
+# main_darts_found_mmimdb.py
 main_darts_found_ntu_ablation.py
 # main_darts_found_ntu.py
 main_darts_searchable_ego.py
-main_darts_searchable_mmimdb.py
+# main_darts_searchable_mmimdb.py
 # main_darts_searchable_ntu.py
 main_darts_searchable_nvgesture.py
 paper_plot.ipynb

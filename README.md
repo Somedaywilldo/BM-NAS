@@ -4,7 +4,7 @@ Yihang Yin, Siyu Huang, Xiang Zhang
 
 ## Full Paper
 
-Please check the our arXiv version [here](https://arxiv.org/abs/2104.09379) for the full paper with supplementary.
+Please check our arXiv version [here](https://arxiv.org/abs/2104.09379) for the full paper with supplementary.
 
 ## Requirements
 
@@ -24,8 +24,24 @@ The backbones (checkpoints) and pre-processed datasets (BM-NAS_dataset) are avai
 
 ## MM-IMDB Experiments
 
-Will be available later.
+You can just use our pre-processed dataset, but you should cite the original [MM-IMDB](https://github.com/johnarevalo/gmu-mmimdb) dataset. 
 
+## Dataset Pre-processing
+
+If you want to use the original one, you can follow these steps. 
+
+You can download **multimodal_imdb.hdf5** from the original repo of [MM-IMDB](https://github.com/johnarevalo/gmu-mmimdb). Then use our pre-processing script to split the dataset.
+
+```shell
+$ python datasets/prepare_mmimdb.py
+```
+
+## Run Experiments
+
+```shell
+$ python main_darts_searchable_mmimdb.py
+$ python main_darts_found_mmimdb.py --search_exp_dir=<dir of search exp>
+```
 
 ## NTU RGB-D Experiments
 
