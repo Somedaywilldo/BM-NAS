@@ -105,7 +105,7 @@ $ python main_darts_found_ego.py --search_exp_dir=<dir of search exp> --eval_exp
 
 You can use **structure_vis.ipynb** to visualize the searched genotypes.
 
-![structure_vis_example](/Users/someday/Desktop/BM-NAS/structure_vis_example.png)
+![structure_vis_example](structure_vis_example.png)
 
 ## Citation
 
