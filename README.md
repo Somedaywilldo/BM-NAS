@@ -4,7 +4,7 @@ Yihang Yin, Siyu Huang, Xiang Zhang
 
 ## Full Paper
 
-![framework](/Users/someday/Desktop/BM-NAS/framework.png)
+![framework](framework.png)
 
 Please check our arXiv version [here](https://arxiv.org/abs/2104.09379) for the full paper with supplementary.
 
