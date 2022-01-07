@@ -4,6 +4,8 @@ Yihang Yin, Siyu Huang, Xiang Zhang
 
 ## Full Paper
 
+![fig-framework-aaai](/Users/someday/Desktop/BM-NAS/fig-framework-aaai.png)
+
 Please check our arXiv version [here](https://arxiv.org/abs/2104.09379) for the full paper with supplementary.
 
 ## Requirements
@@ -16,6 +18,7 @@ opencv-python==4.5.5.62
 sklearn==1.10.1
 tqdm
 IPython
+graphviz (you need excutebles, not only Python API)
 ```
 
 ## Pre-trained Backbones and Pre-processed Datasets
@@ -80,7 +83,29 @@ $ python main_darts_found_ntu.py --search_exp_dir=<dir of search exp> --eval_exp
 
 ## EgoGesture Experiments
 
-Will be available later.
+First search the hypernets. You can use **--parallel** for data-parallel. You may adjust the **--batchsize** according to your GPU memory budget. 
+
+```shell
+$ python main_darts_searchable_ego.py --parallel
+```
+
+Then train the searched fusion network. You need to assign the searching experiment by **--search_exp_dir**.
+
+```shell
+$ python main_darts_found_ego.py --search_exp_dir=<dir of search exp>
+```
+
+If you want to just run the test process (no training of the fusion network), you can also use this script, you need to assign both the searching and evaluation experiments directories.
+
+```shell
+$ python main_darts_found_ego.py --search_exp_dir=<dir of search exp> --eval_exp_dir=<dir of eval exp>
+```
+
+## Visualization
+
+You can use **structure_vis.ipynb** to visualize the searched genotypes.
+
+![structure_vis_example](/Users/someday/Desktop/BM-NAS/structure_vis_example.png)
 
 ## Citation
 
