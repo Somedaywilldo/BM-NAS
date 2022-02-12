@@ -311,48 +311,6 @@ def modify_kernels(opt, model, modality):
                                                list(range(len(modules)))))[0]
     return model
 
-# def parse_opts():
-#     parser = argparse.ArgumentParser()
-#     parser.add_argument('--modality', default='RGB', type=str, help='Modality of generated model. RGB, Flow or RGBFlow')
-#     parser.add_argument('--dataset', default='kinetics', type=str, help='Used dataset (activitynet | kinetics | ucf101 | hmdb51)')
-#     parser.add_argument('--n_classes', default=25, type=int, help='Number of classes (activitynet: 200, kinetics: 400, ucf101: 101, hmdb51: 51)')
-#     parser.add_argument('--n_finetune_classes', default=25, type=int, help='Number of classes for fine-tuning. n_classes is set to the number when pretraining.')
-#     parser.add_argument('--sample_size', default=112, type=int, help='Height and width of inputs')
-#     parser.add_argument('--sample_duration', default=32, type=int, help='Temporal duration of inputs')
-#     parser.add_argument('--downsample', default=1, type=int, help='Downsampling. Selecting 1 frame out of N')
-#     parser.add_argument('--resume_path', default='', type=str, help='Save data (.pth) of previous training')
-#     parser.add_argument('--ft_portion', default='complete', type=str, help='The portion of the model to apply fine tuning, either complete or last_layer')
-#     parser.add_argument('--norm_value', default=1, type=int, help='If 1, range of inputs is [0-255]. If 255, range of inputs is [0-1].')
-#     parser.add_argument('--model', default='resnext', type=str, help='(resnet | preresnet | wideresnet | resnext | densenet | ')
-#     parser.add_argument('--model_depth', default=101, type=int, help='Depth of resnet (10 | 18 | 34 | 50 | 101)')
-#     parser.add_argument('--resnet_shortcut', default='B', type=str, help='Shortcut type of resnet (A | B)')
-#     parser.add_argument('--wide_resnet_k', default=2, type=int, help='Wide resnet k')
-#     parser.add_argument('--resnext_cardinality', default=32, type=int, help='ResNeXt cardinality')
-#     parser.add_argument('--groups', default=1, type=int, help='The number of groups at group convolutions at conv layers')
-#     parser.add_argument('--width_mult', default=1.0, type=float, help='The applied width multiplier to scale number of filters')
-#     parser.add_argument('--manual_seed', default=1, type=int, help='Manually set random seed')
-#     args = parser.parse_args("")
-#     return args
-
-if __name__ == '__main__':
-    args = parse_opts()
-
-    args.resume_path = '/Users/v_yinyihang/Desktop/yihang/Baidu_MM/mfas/checkpoints/nvgesture_resnext_1.0x_Depth_32_checkpoint.pth'
-    args.modality = 'Depth'
-    
-    model = generate_model(args)
-    inputs = torch.randn(40, 1, 32, 112, 112)
-
-    use_gpu = torch.cuda.is_available()
-    device = torch.device("cuda:0" if use_gpu else "cpu")
-    # if torch.cuda.device_count() > 1 and args.parallel:
-    if torch.cuda.device_count() > 1:
-        model = torch.nn.DataParallel(model)
-    model.to(device)
-    inputs = inputs.to(device)
-    output = model(inputs)
-    embed()
-    # print(model)
 '''
 x1shape: torch.Size([10, 256, 16, 28, 28])
 x2shape: torch.Size([10, 512, 8, 14, 14])

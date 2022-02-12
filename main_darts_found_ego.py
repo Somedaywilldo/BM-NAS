@@ -37,9 +37,9 @@ def parse_args():
                         default='/mnt/data/xiaoxiang/yihang/Baidu_MM/BM-NAS/checkpoints/ego')
     parser.add_argument('--annotation', default='/mnt/data/xiaoxiang/yihang/Baidu_MM/BM-NAS/checkpoints/ego/egogestureall_but_None.json', type=str, help='Annotation file path')
     parser.add_argument('--rgb_cp', type=str, help='rgb video model pth path',
-                        default='egogesture_resnext_1.0x_RGB_32_acc_94.01245.pth')
+                        default='egogesture_resnext_1.0x_RGB_32_acc_94.01245.checkpoint')
     parser.add_argument('--depth_cp', type=str, help='depth video model pth path',
-                        default='egogesture_resnext_1.0x_Depth_32_acc_93.61060.pth')
+                        default='egogesture_resnext_1.0x_Depth_32_acc_93.61060.checkpoint')
     
     # dataset and data parallel
     parser.add_argument('--datadir', type=str, help='data directory',
