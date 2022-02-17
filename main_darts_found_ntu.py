@@ -43,7 +43,7 @@ def parse_args():
     parser.add_argument('--weight_decay', type=float, default=3e-4, help='weight decay')
     parser.add_argument('--num_input_nodes', type=int, help='cell input', default=8)
     parser.add_argument('--num_keep_edges', type=int, help='cell step connect', default=2)
-    parser.add_argument('--multiplier', type=int, help='cell output concat', default=4)
+    parser.add_argument('--multiplier', type=int, help='cell output concat', default=2)
     parser.add_argument('--steps', type=int, help='cell steps', default=4)
     parser.add_argument('--unrolled', action="store_true", default=False, help='unrolled gradient of darts')
     parser.add_argument('--seed', type=int, default=2, help='random seed')
@@ -51,10 +51,10 @@ def parse_args():
     parser.add_argument('--save', type=str, default='EXP', help='load dir')
     # search-EXP-20200824-012150
     # for darts operations and inner representation size
-    parser.add_argument('--C', type=int, help='channels', default=256)
+    parser.add_argument('--C', type=int, help='channels', default=128)
     parser.add_argument('--L', type=int, help='length after pool', default=8)
     # parser.add_argument('--num_heads', type=int, help='attention heads number', default=2)
-    parser.add_argument('--node_multiplier', type=int, help='inner node output concat', default=1)
+    parser.add_argument('--node_multiplier', type=int, help='inner node output concat', default=2)
     parser.add_argument('--node_steps', type=int, help='inner node steps', default=2)
     
     parser.add_argument('--small_dataset', action='store_true', default=False, help='dataset scale')
@@ -62,9 +62,9 @@ def parse_args():
     parser.add_argument('--num_outputs', type=int, help='output dimension', default=60)
     parser.add_argument('--batchsize', type=int, help='batch size', default=96)
 
-    parser.add_argument('--epochs', type=int, help='training epochs', default=30)
-    parser.add_argument('--eta_max', type=float, help='eta max', default=0.001)
-    parser.add_argument('--eta_min', type=float, help='eta min', default=0.000001)
+    parser.add_argument('--epochs', type=int, help='training epochs', default=50)
+    parser.add_argument('--eta_max', type=float, help='eta max', default=3e-4)
+    parser.add_argument('--eta_min', type=float, help='eta min', default=1e-6)
     parser.add_argument('--Ti', type=int, help='epochs Ti', default=5)
     parser.add_argument('--Tm', type=int, help='epochs multiplier Tm', default=2)
     parser.add_argument('--parallel', help='Use several GPUs', action='store_true', dest='parallel',

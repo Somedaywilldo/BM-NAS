@@ -31,17 +31,17 @@ def parse_args():
     parser.add_argument('--arch_weight_decay', type=float, default=1e-3, help='weight decay for arch encoding')
     
 
-    parser.add_argument('--weight_decay', type=float, default=1e-4, help='weight decay')
+    parser.add_argument('--weight_decay', type=float, default=3e-4, help='weight decay')
     parser.add_argument('--num_input_nodes', type=int, help='cell input', default=8)
     parser.add_argument('--num_keep_edges', type=int, help='cell step connect', default=2)
-    parser.add_argument('--multiplier', type=int, help='cell output concat', default=4)
-    parser.add_argument('--steps', type=int, help='cell steps', default=4)
+    parser.add_argument('--multiplier', type=int, help='cell output concat', default=2)
+    parser.add_argument('--steps', type=int, help='cell steps', default=2)
     
-    parser.add_argument('--node_multiplier', type=int, help='inner node output concat', default=1)
+    parser.add_argument('--node_multiplier', type=int, help='inner node output concat', default=2)
     parser.add_argument('--node_steps', type=int, help='inner node steps', default=2)
     
     # for darts operations and inner representation size
-    parser.add_argument('--C', type=int, help='channels for conv layer', default=256)
+    parser.add_argument('--C', type=int, help='channels for conv layer', default=128)
     parser.add_argument('--L', type=int, help='length after conv and pool', default=8)
     # parser.add_argument('--num_heads', type=int, help='attention heads number', default=2)
     parser.add_argument('--batchsize', type=int, help='batch size', default=96)
@@ -52,12 +52,12 @@ def parse_args():
     parser.add_argument('--small_dataset', action='store_true', default=False, help='dataset scale')
 
     parser.add_argument('--num_outputs', type=int, help='output dimension', default=60)
-    parser.add_argument('--epochs', type=int, help='training epochs', default=80)
-    parser.add_argument('--eta_max', type=float, help='eta max', default=3e-4)
+    parser.add_argument('--epochs', type=int, help='training epochs', default=30)
+    parser.add_argument('--eta_max', type=float, help='eta max', default=1e-3)
     parser.add_argument('--eta_min', type=float, help='eta min', default=1e-6)
     parser.add_argument('--Ti', type=int, help='epochs Ti', default=1)
     parser.add_argument('--Tm', type=int, help='epochs multiplier Tm', default=2)
-    parser.add_argument('--num_workers', type=int, help='Dataloader CPUS', default=8)
+    parser.add_argument('--num_workers', type=int, help='Dataloader CPUS', default=16)
 
     parser.add_argument("--drpt", action="store", default=0.2, dest="drpt", type=float, help="dropout")
     parser.add_argument('--save', type=str, default='EXP', help='experiment name')
