@@ -1,12 +1,12 @@
-# BM-NAS: Bilevel Multimodal Neural Architecture Search (AAAI 2022)
+# BM-NAS: Bilevel Multimodal Neural Architecture Search (AAAI 2022 Oral)
 
 Yihang Yin, Siyu Huang, Xiang Zhang
 
-## Full Paper
+## Paper, Poster and Presentation
 
 ![framework](framework.png)
 
-Please check our arXiv version [here](https://arxiv.org/abs/2104.09379) for the full paper with supplementary.
+Please check our arXiv version [here](https://arxiv.org/abs/2104.09379) for the full paper with supplementary. We also provide our [poster](poster.pdf) in this repo. Our oral presentation video at AAAI-2022 can be found on YouTube, for both the [brief introduction](https://youtu.be/mP4u40Zkd4I) and the [full version](https://youtu.be/EGZu5bOi_M4).
 
 ## Requirements
 
