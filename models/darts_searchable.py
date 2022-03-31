@@ -15,9 +15,9 @@ from datasets import ntu as ntu_data
 import models.search.mmimdb_darts_searchable as mmimdb
 from datasets import mmimdb as mmimdb_data
 
-# # egogesture
-# import models.search.ego_darts_searchable as ego
-# from datasets import ego as ego_data
+# egogesture
+import models.search.ego_darts_searchable as ego
+from datasets import ego as ego_data
 
 from models.utils import parse_opts
 import models.search.tools as tools

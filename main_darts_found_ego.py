@@ -34,23 +34,23 @@ def parse_args():
 
     # pretrained backbone checkpoints and annotations
     parser.add_argument('--checkpointdir', type=str, help='pretrained checkpoints and annotations dir',
-                        default='/mnt/data/xiaoxiang/yihang/Baidu_MM/BM-NAS/checkpoints/ego')
-    parser.add_argument('--annotation', default='/mnt/data/xiaoxiang/yihang/Baidu_MM/BM-NAS/checkpoints/ego/egogestureall_but_None.json', type=str, help='Annotation file path')
+                        default='checkpoints/ego')
+    parser.add_argument('--annotation', default='egogestureall_but_None.json', type=str, help='Annotation file path')
     parser.add_argument('--rgb_cp', type=str, help='rgb video model pth path',
-                        default='egogesture_resnext_1.0x_RGB_32_acc_94.01245.checkpoint')
+                        default='egogesture_resnext_1.0x_RGB_32_acc_94.01245.pth')
     parser.add_argument('--depth_cp', type=str, help='depth video model pth path',
-                        default='egogesture_resnext_1.0x_Depth_32_acc_93.61060.checkpoint')
+                        default='egogesture_resnext_1.0x_Depth_32_acc_93.61060.pth')
     
     # dataset and data parallel
     parser.add_argument('--datadir', type=str, help='data directory',
-                        default='/mnt/scratch/xiaoxiang/yihang/EgoGesture')
+                        default='EgoGesture')
     parser.add_argument('--small_dataset', action='store_true', default=False, help='use mini dataset for debugging')
-    parser.add_argument('--use_dataparallel', help='Use several GPUs', action='store_true', dest='use_dataparallel',
+    parser.add_argument('--parallel', help='Use several GPUs', action='store_true', dest='parallel',
                         default=False)
     parser.add_argument('--j', dest='num_workers', type=int, help='Dataloader CPUS', default=32)
     
     # basic learning settings
-    parser.add_argument('--batchsize', type=int, help='batch size', default=48)
+    parser.add_argument('--batchsize', type=int, help='batch size', default=96)
     parser.add_argument('--epochs', type=int, help='training epochs', default=50)
     parser.add_argument("--drpt", action="store", default=0.2, dest="drpt", type=float, help="dropout")
 
@@ -59,12 +59,12 @@ def parse_args():
     parser.add_argument('--num_keep_edges', type=int, help='cells and steps will have 2 input edges', default=2)
     
     # for cells and steps and inner representation size
-    parser.add_argument('--C', type=int, help='channels', default=256)
+    parser.add_argument('--C', type=int, help='channels', default=128)
     parser.add_argument('--L', type=int, help='length after pool', default=8)
-    parser.add_argument('--multiplier', type=int, help='cell output concat', default=4)
-    parser.add_argument('--steps', type=int, help='cell steps', default=4)
-    parser.add_argument('--node_multiplier', type=int, help='inner node output concat', default=1)
-    parser.add_argument('--node_steps', type=int, help='inner node steps', default=2)
+    parser.add_argument('--multiplier', type=int, help='cell output concat', default=2)
+    parser.add_argument('--steps', type=int, help='cell steps', default=2)
+    parser.add_argument('--node_multiplier', type=int, help='inner node output concat', default=3)
+    parser.add_argument('--node_steps', type=int, help='inner node steps', default=3)
     
     # number of classes    
     parser.add_argument('--num_outputs', type=int, help='output dimension', default=83)
@@ -104,14 +104,14 @@ def train_model(model, criterion, dataloaders, args, device, logger):
 
     # optimizer and scheduler
     # hardware tuning
-    if torch.cuda.device_count() > 1 and args.use_dataparallel:
+    if torch.cuda.device_count() > 1 and args.parallel:
         model = torch.nn.DataParallel(model)
     model.to(device)
 
     plotter = Plotter(args)
     params = None
 
-    if torch.cuda.device_count() > 1 and args.use_dataparallel:
+    if torch.cuda.device_count() > 1 and args.parallel:
         params = model.module.parameters()
         # params = model.module.central_params()
     else:
@@ -126,7 +126,7 @@ def train_model(model, criterion, dataloaders, args, device, logger):
     test_acc, test_genotype = tr.train_ego_track_acc(model, None, criterion, optimizer, 
                                             scheduler, dataloaders, dataset_sizes,
                                             device, args.epochs,
-                                            args.use_dataparallel, logger, plotter, args,
+                                            args.parallel, logger, plotter, args,
                                             status)
 
     # logger.info('Final test acc: ' + str(val_acc) )
@@ -139,7 +139,7 @@ def test_model(model, criterion, dataloaders, args, device,
     model.eval()
     dataset_sizes = {x: len(dataloaders[x].dataset) for x in ['test']}
     # hardware tuning
-    if torch.cuda.device_count() > 1 and args.use_dataparallel:
+    if torch.cuda.device_count() > 1 and args.parallel:
         # print("using parallel")
         model = torch.nn.DataParallel(model)
     model.to(device)

@@ -20,24 +20,24 @@ def parse_args():
 
     # pretrained backbone checkpoints and annotations
     parser.add_argument('--checkpointdir', type=str, help='pretrained checkpoints and annotations dir',
-                        default='/mnt/data/xiaoxiang/yihang/Baidu_MM/BM-NAS/checkpoints/ego')
+                        default='checkpoints/ego')
     parser.add_argument('--annotation', default='egogestureall_but_None.json', type=str, help='Annotation file path')
     parser.add_argument('--rgb_cp', type=str, help='rgb video model pth path',
-                        default='egogesture_resnext_1.0x_RGB_32_acc_94.01245.checkpoint')
+                        default='egogesture_resnext_1.0x_RGB_32_acc_94.01245.pth')
     parser.add_argument('--depth_cp', type=str, help='depth video model pth path',
-                        default='egogesture_resnext_1.0x_Depth_32_acc_93.61060.checkpoint')
+                        default='egogesture_resnext_1.0x_Depth_32_acc_93.61060.pth')
     
     # dataset and data parallel
     parser.add_argument('--datadir', type=str, help='data directory',
-                        default='/mnt/scratch/xiaoxiang/yihang/EgoGesture')
+                        default='EgoGesture')
     parser.add_argument('--small_dataset', action='store_true', default=False, help='use mini dataset for debugging')
-    parser.add_argument('--use_dataparallel', help='Use several GPUs', action='store_true', dest='use_dataparallel',
+    parser.add_argument('--parallel', help='Use several GPUs', action='store_true', dest='parallel',
                         default=False)
     parser.add_argument('--j', dest='num_workers', type=int, help='Dataloader CPUS', default=32)
 
     # basic learning settings
     parser.add_argument('--batchsize', type=int, help='batch size', default=96)
-    parser.add_argument('--epochs', type=int, help='training epochs', default=7)
+    parser.add_argument('--epochs', type=int, help='training epochs', default=30)
     parser.add_argument("--drpt", action="store", default=0, dest="drpt", type=float, help="dropout")
 
     # number of input features

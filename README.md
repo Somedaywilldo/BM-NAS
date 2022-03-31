@@ -83,6 +83,18 @@ $ python main_darts_found_ntu.py --search_exp_dir=<dir of search exp> --eval_exp
 
 ## EgoGesture Experiments
 
+### Dataset Pre-processing
+
+Download the EgoGesture dataset from the official [site](http://www.nlpr.ia.ac.cn/iva/yfzhang/datasets/egogesture.html). You only need to download the image data. And unzip the data into this kind of structure.
+
+```
+├── EgoGesture
+│   ├── Subject01
+│   ├── Subject02
+```
+
+### Run Experiments
+
 First search the hypernets. You can use **--parallel** for data-parallel. You may adjust the **--batchsize** according to your GPU memory budget. 
 
 ```shell
