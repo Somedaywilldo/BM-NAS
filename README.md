@@ -23,8 +23,8 @@ graphviz (you need excutebles, not only Python API)
 
 ## Pre-trained Backbones and Pre-processed Datasets
 
-The backbones (checkpoints) and pre-processed datasets (BM-NAS_dataset) are available at [here](https://www.aliyundrive.com/s/CGxXMGRuTfJ), you can download them and put them in the root directory.
-For some weird reason, ego checkpoints are blocked by AliCloud, There is an alternative Google Drive link for checkpoints at [here](https://drive.google.com/drive/folders/1GxcZXWnN6JP447q2fe5MtG-j3JWcgMbX?usp=sharing).
+The backbones (checkpoints) and pre-processed datasets (BM-NAS_dataset) are available at Baidu Netdisk. Since downloading large files on Baidu Netdisk could be very slow, you can use either [original version](https://pan.baidu.com/s/1LOo49-rnOjo5nL__wGTYUQ?pwd=fi6j) or [split zipped version](https://pan.baidu.com/s/13rN63J97LO-in0GJjRnBaw?pwd=56vi). There is an alternative Google Drive link for checkpoints at [here](https://drive.google.com/drive/folders/1GxcZXWnN6JP447q2fe5MtG-j3JWcgMbX?usp=sharing).
+
 ## MM-IMDB Experiments
 
 You can just use our pre-processed dataset, but you should cite the original [MM-IMDB](https://github.com/johnarevalo/gmu-mmimdb) dataset. 
